@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 public class WebShop {
 
@@ -67,8 +68,10 @@ public class WebShop {
     }
 
     public static void main(String[] args) throws Exception {
-        var serv = new WebShop(8080);
-        serv.start();
+        int port = Optional.ofNullable(System.getenv("HTTP_PLATFORM_PORT"))
+                .map(Integer::parseInt)
+                .orElse(8080);
+        new WebShop(port).start();
     }
 
 }
