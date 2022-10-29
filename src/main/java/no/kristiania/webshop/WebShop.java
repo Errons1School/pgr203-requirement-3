@@ -20,41 +20,43 @@ public class WebShop {
     private final Server server;
     private final static Logger logger = LoggerFactory.getLogger(WebShop.class);
 
-    public WebShop(int port) {
+    public WebShop(int port) throws IOException {
         this.server = new Server(port);
         server.setHandler(createWebApp());
     }
 
-    private static WebAppContext createWebApp() {
+    private static WebAppContext createWebApp() throws IOException {
         var webAppContext = new WebAppContext();
         webAppContext.setContextPath("/");
         var resources = Resource.newClassPathResource("/webapp");
 
+        useFolderIfExist(webAppContext, resources);
 //        resource that is read from .../target/classes/...
 
-        try {
-//            resources that is read from .../src/main/resources...
-            var sourceDir = new File(resources.getFile().getAbsoluteFile().toString()
-                    .replace('\\', '/')
-                    .replace("target/classes", "src/main/resources")
-            );
-//            Use this for making jetty not locking down the files we use to make webpages
-            if (sourceDir.isDirectory()) {
-
-                webAppContext.setBaseResource(Resource.newResource(sourceDir));
-                webAppContext.setInitParameter(DefaultServlet.CONTEXT_INIT + "useFileMappedBuffer", "false");
-            }
-
-        } catch (IOException e) {
-//            If something should go wrong use .../target/classes/*resources*
-            webAppContext.setBaseResource(resources);
-            logger.warn("Resources is read from target-folder");
-        }
+        webAppContext.setInitParameter(DefaultServlet.CONTEXT_INIT + "useFileMappedBuffer", "false");
         var servletHolder = webAppContext.addServlet(ServletContainer.class, "/api/*");
         servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
 
 
         return webAppContext;
+    }
+
+    private static void  useFolderIfExist(WebAppContext webAppContext, Resource resources) throws IOException {
+        if (resources.getFile() == null) {
+            webAppContext.setBaseResource(resources);
+            return;
+        }
+        var sourceDirectory = new File(resources.getFile().getAbsoluteFile().toString()
+                .replace('\\', '/')
+                .replace("target/classes", "src/main/resources"));
+        if (sourceDirectory.isDirectory()) {
+            webAppContext.setBaseResource(Resource.newResource(sourceDirectory));
+            webAppContext.setInitParameter(DefaultServlet.CONTEXT_INIT + "useFileMappedBuffer", "false");
+        } else {
+            webAppContext.setBaseResource(resources);
+            
+        }
+
     }
 
 
