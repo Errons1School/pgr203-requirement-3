@@ -1,4 +1,4 @@
-package no.kristiania.server;
+package no.kristiania.webshop;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -50,7 +50,7 @@ public class WebShop {
             logger.warn("Resources is read from target-folder");
         }
         var servletHolder = webAppContext.addServlet(ServletContainer.class, "/api/*");
-        servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.server");
+        servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
 
 
         return webAppContext;

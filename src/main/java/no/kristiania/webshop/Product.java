@@ -1,4 +1,4 @@
-package no.kristiania.server;
+package no.kristiania.webshop;
 
 public class Product {
     private String name;

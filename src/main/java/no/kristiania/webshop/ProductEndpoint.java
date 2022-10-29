@@ -1,4 +1,4 @@
-package no.kristiania.server;
+package no.kristiania.webshop;
 
 import jakarta.json.Json;
 import jakarta.ws.rs.GET;
