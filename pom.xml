@@ -5,9 +5,11 @@
     <groupId>no.kristiania.webshop</groupId>
     <artifactId>arbeidskrav3-webshop</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <azure.appName>${project.artifactId}-freebatties</azure.appName>
     </properties>
 
 
@@ -45,8 +47,8 @@
                 <configuration>
                     <schemaVersion>v2</schemaVersion>
 <!--                    <subscriptionId></subscriptionId>-->
-                    <resourceGroup>arbeidskrav3-webshop-1667046447438-rg</resourceGroup>
-                    <appName>arbeidskrav3-webshop-1667046447438</appName>
+                    <resourceGroup>${project.groupId}</resourceGroup>
+                    <appName>${azure.appName}</appName>
                     <pricingTier>F1</pricingTier>
                     <region>westeurope</region>
                     <runtime>
