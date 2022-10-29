@@ -1,0 +1,3 @@
+application.properties.templatejdbc.url=jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true
+jdbc.username=sa
+#jdbc.password=this is secret, do not check it in!
