@@ -141,7 +141,12 @@
             <artifactId>jersey-container-servlet</artifactId>
             <version>3.0.8</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>11.2.1.jre17</version>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
