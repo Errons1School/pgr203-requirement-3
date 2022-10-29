@@ -1,12 +1,10 @@
 package no.kristiania.db;
 
-import no.kristiania.webshop.InMemoryDataSource;
 import no.kristiania.webshop.Product;
 import no.kristiania.webshop.db.JdbcProductDao;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

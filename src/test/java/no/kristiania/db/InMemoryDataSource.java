@@ -1,4 +1,4 @@
-package no.kristiania.webshop;
+package no.kristiania.db;
 
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
