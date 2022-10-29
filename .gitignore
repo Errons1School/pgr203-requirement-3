@@ -3,3 +3,4 @@
 *.iml
 /src/main/resources/webapp/
 /src/main/resources/webapp/assets/
+/dependency-reduced-pom.xml
