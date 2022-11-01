@@ -18,14 +18,21 @@ public class DataSourceFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)  throws IOException, ServletException {
-        Connection connection = null;
+
         try {
-            connection = config.createConnectionForRequest();
+            var con = config.createConnectionForRequest();
+            con.setAutoCommit(false);
+            //con.beginRequest();
+            filterChain.doFilter(servletRequest, servletResponse);
+            con.commit();
+            con.close();
+            //con.endRequest();
+
+
+            config.cleanRequestConnection();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
-        config.cleanRequestConnection();
     }
 }
