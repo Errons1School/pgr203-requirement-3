@@ -36,7 +36,7 @@ class WebShopTest {
                 .asString(StandardCharsets.UTF_8)
                 .contains("<title>shop</title>");
     }
-    @Test
+    /*@Test
     public void PostRequestAddProductTest() throws Exception {
         var postConnection = openConnection("/api/products");
         postConnection.setRequestMethod("POST");
@@ -61,7 +61,7 @@ class WebShopTest {
         assertThat(getConnection.getInputStream())
                 .asString(StandardCharsets.UTF_8)
                 .contains("testlaptop");
-    }
+    }*/
 
 
     private HttpURLConnection openConnection(String spec) throws IOException {
