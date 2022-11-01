@@ -52,15 +52,18 @@ public class JdbcProductDao implements ProductDao{
                 List<Product> products = new ArrayList<>();
 
                 var resultProducts = statementProducts.executeQuery();
-                resultProducts.next();
-                var tmpProduct = new Product();
-                tmpProduct.setName(resultProducts.getString(2));
-                tmpProduct.setCategory(resultProducts.getString(3));
-                tmpProduct.setImg(resultProducts.getString(4));
-                tmpProduct.setDescription(resultProducts.getString(5));
-                tmpProduct.setPrice(resultProducts.getInt(6));
-                tmpProduct.setStock(resultProducts.getInt(7));
-                products.add(tmpProduct);
+               // resultProducts.next();
+                while (resultProducts.next()){
+                    var tmpProduct = new Product();
+                    tmpProduct.setName(resultProducts.getString(2));
+                    tmpProduct.setCategory(resultProducts.getString(3));
+                    tmpProduct.setImg(resultProducts.getString(4));
+                    tmpProduct.setDescription(resultProducts.getString(5));
+                    tmpProduct.setPrice(resultProducts.getInt(6));
+                    tmpProduct.setStock(resultProducts.getInt(7));
+                    products.add(tmpProduct);
+                }
+
                 return products;
             }
         }

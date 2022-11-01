@@ -1,5 +1,6 @@
 package no.kristiania.webshop;
 
+import jakarta.servlet.DispatcherType;
 import no.kristiania.webshop.db.JdbcProductDao;
 import no.kristiania.webshop.db.ProductDao;
 import org.eclipse.jetty.server.Server;
@@ -19,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +48,7 @@ public class WebShop {
         webAppContext.addServlet(new ServletHolder(new ServletContainer(config)), "/api/*");
         //var servletHolder = webAppContext.addServlet(ServletContainer.class, "/api/*");
         //servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
-        webAppContext.addFilter(new FilterHolder(new DataSourceFilter(config)),"/api/*");
+        webAppContext.addFilter(new FilterHolder(new DataSourceFilter(config)),"/api/*", EnumSet.of(DispatcherType.REQUEST));
 
 
         return webAppContext;

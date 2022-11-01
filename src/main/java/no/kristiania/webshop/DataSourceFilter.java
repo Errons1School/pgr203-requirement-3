@@ -1,9 +1,13 @@
 package no.kristiania.webshop;
 
 import jakarta.servlet.*;
-import org.eclipse.jetty.servlet.Source;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class DataSourceFilter implements Filter {
     private final WebshopEndpointConfig config;
@@ -13,7 +17,15 @@ public class DataSourceFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)  throws IOException, ServletException {
+        Connection connection = null;
+        try {
+            connection = config.createConnectionForRequest();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+        filterChain.doFilter(servletRequest, servletResponse);
+        config.cleanRequestConnection();
     }
 }
