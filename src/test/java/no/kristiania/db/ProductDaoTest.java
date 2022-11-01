@@ -10,7 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductDaoTest {
 
-    private final JdbcProductDao dao = new JdbcProductDao(InMemoryDataSource.createTestDataSource());
+    private final JdbcProductDao dao = new JdbcProductDao(InMemoryDataSource.createTestDataSource().getConnection());
+
+    public ProductDaoTest() throws SQLException {}
 
 
     //    We sort the arrays for Platforms because when we check for .isEqual the order of array must mach.
