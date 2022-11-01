@@ -1,6 +1,8 @@
 package no.kristiania.webshop;
 
 import jakarta.json.Json;
+import no.kristiania.db.InMemoryDataSource;
+import no.kristiania.webshop.db.JdbcProductDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +18,10 @@ class WebShopTest {
 
     private WebShop server;
 
+
     @BeforeEach
     public void setupServer() throws Exception {
-        this.server = new WebShop(0);
+        this.server = new WebShop(0,InMemoryDataSource.createTestDataSource());
         server.start();
     }
 
@@ -36,7 +40,7 @@ class WebShopTest {
                 .asString(StandardCharsets.UTF_8)
                 .contains("<title>shop</title>");
     }
-    /*@Test
+    @Test
     public void PostRequestAddProductTest() throws Exception {
         var postConnection = openConnection("/api/products");
         postConnection.setRequestMethod("POST");
@@ -61,7 +65,7 @@ class WebShopTest {
         assertThat(getConnection.getInputStream())
                 .asString(StandardCharsets.UTF_8)
                 .contains("testlaptop");
-    }*/
+    }
 
 
     private HttpURLConnection openConnection(String spec) throws IOException {
