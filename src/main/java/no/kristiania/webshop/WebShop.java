@@ -4,6 +4,8 @@ import no.kristiania.webshop.db.JdbcProductDao;
 import no.kristiania.webshop.db.ProductDao;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.FilterHolder;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -39,8 +41,12 @@ public class WebShop {
 //        resource that is read from .../target/classes/...
 
         webAppContext.setInitParameter(DefaultServlet.CONTEXT_INIT + "useFileMappedBuffer", "false");
-        var servletHolder = webAppContext.addServlet(ServletContainer.class, "/api/*");
-        servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
+        var dataSource = Database.getDataSource();
+        var config = new WebshopEndpointConfig(dataSource);
+        webAppContext.addServlet(new ServletHolder(new ServletContainer(config)), "/api/*");
+        //var servletHolder = webAppContext.addServlet(ServletContainer.class, "/api/*");
+        //servletHolder.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
+        webAppContext.addFilter(new FilterHolder(new DataSourceFilter(config)),"/api/*");
 
 
         return webAppContext;
