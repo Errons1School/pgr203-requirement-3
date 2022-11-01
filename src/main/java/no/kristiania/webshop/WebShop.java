@@ -1,5 +1,7 @@
 package no.kristiania.webshop;
 
+import no.kristiania.webshop.db.JdbcProductDao;
+import no.kristiania.webshop.db.ProductDao;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.resource.Resource;
@@ -13,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class WebShop {
@@ -76,6 +81,76 @@ public class WebShop {
                 .map(Integer::parseInt)
                 .orElse(8080);
         new WebShop(port).start();
+        //FillServerWhitData();
     }
+
+    private static void FillServerWhitData() throws IOException, SQLException {
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(
+                "acer",
+                "laptop",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOqCspEYYS3XO-De0ytx4WpAvX9OeAu_3F8vugL4ZL&s",
+                "This is a good laptop",
+                14955,
+                15
+        ));
+        products.add(new Product(
+                "mac air",
+                "laptop",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOqCspEYYS3XO-De0ytx4WpAvX9OeAu_3F8vugL4ZL&s",
+                "best there is",
+                22955,
+                2
+        ));
+        products.add(new Product(
+                "legion",
+                "laptop",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOqCspEYYS3XO-De0ytx4WpAvX9OeAu_3F8vugL4ZL&s",
+                "best there is",
+                22955,
+                2
+        ));
+        products.add(new Product(
+                "racer naga",
+                "mouse",
+                "tom",
+                "best there is",
+                255,
+                10
+        ));
+        products.add(new Product(
+                "dell E200",
+                "mouse",
+                "tom",
+                "best there is",
+                255,
+                10
+        ));
+        products.add(new Product(
+                "RTX3090",
+                "gpu",
+                "http://storage-asset.msi.com/global/picture/image/feature/vga/NVIDIA/VGA-2020/image/vga-body.png",
+                "best there is",
+                15000,
+                100
+        ));
+        products.add(new Product(
+                "RTX4090",
+                "gpu",
+                "http://storage-asset.msi.com/global/picture/image/feature/vga/NVIDIA/VGA-2020/image/vga-body.png",
+                "best there is",
+                25500,
+                1
+        ));
+        //Server();
+        var db = Database.getDataSource();
+
+        ProductDao dao = new JdbcProductDao(db);
+        for (var product : products) {
+            dao.saveProduct(product);
+        }
+    }
+
+
 
 }
