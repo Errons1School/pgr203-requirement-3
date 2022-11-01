@@ -145,7 +145,7 @@ public class WebShop {
         //Server();
         var db = Database.getDataSource();
 
-        ProductDao dao = new JdbcProductDao(db);
+        ProductDao dao = new JdbcProductDao(db.getConnection());
         for (var product : products) {
             dao.saveProduct(product);
         }
