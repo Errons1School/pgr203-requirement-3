@@ -1,6 +1,7 @@
 package no.kristiania.webshop;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.flywaydb.core.Flyway;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class Database {
             dataSource.setPassword(properties.getProperty("jdbc.docker.password"));
         }
 
+        var flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.migrate();
         return dataSource;
     }
 }
