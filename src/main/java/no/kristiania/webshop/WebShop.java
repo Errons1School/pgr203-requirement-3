@@ -46,15 +46,17 @@ public class WebShop {
             webAppContext.setBaseResource(resources);
             return;
         }
+
         var sourceDirectory = new File(resources.getFile().getAbsoluteFile().toString()
                 .replace('\\', '/')
                 .replace("target/classes", "src/main/resources"));
+
         if (sourceDirectory.isDirectory()) {
             webAppContext.setBaseResource(Resource.newResource(sourceDirectory));
             webAppContext.setInitParameter(DefaultServlet.CONTEXT_INIT + "useFileMappedBuffer", "false");
+
         } else {
             webAppContext.setBaseResource(resources);
-            
         }
 
     }
