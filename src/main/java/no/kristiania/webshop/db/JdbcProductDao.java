@@ -43,7 +43,7 @@ public class JdbcProductDao implements ProductDao{
 
     @Override
     public List<Product> getAllProduct() throws SQLException {
-        try (connection) {
+
             var sql = """
                 SELECT *
                 FROM products;
@@ -67,7 +67,7 @@ public class JdbcProductDao implements ProductDao{
 
                 return products;
             }
-        }
+
 
     }
 
