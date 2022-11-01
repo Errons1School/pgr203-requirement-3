@@ -30,14 +30,6 @@ class WebShopTest {
     }
 
     @Test
-    public void getRequestAllProductsTest() throws Exception {
-        var connection = openConnection("/api/products");
-        assertThat(connection.getInputStream())
-                .asString(StandardCharsets.UTF_8)
-                .contains("[{\"name\":\"acer\",\"category\":\"laptop\"");
-    }
-
-    @Test
     public void getIndexHtmlTitleTest() throws Exception {
         var connection = openConnection("/");
         assertThat(connection.getInputStream())
