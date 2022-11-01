@@ -5,4 +5,4 @@
 /src/main/resources/webapp/assets/
 /dependency-reduced-pom.xml
 /src/main/client/node/
-/*.properties
+*.properties

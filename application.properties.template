@@ -2,10 +2,9 @@
 jdbc.url=jdbc:sqlserver://localhost:1433;encrypt=true; trustServerCertificate=true
 jdbc.username=sa
 jdbc.docker.username=sa
-jdbc.docker.password=ShopWeb!
+jdbc.docker.password=
 
 
 jdbc.azure.url=
 jdbc.azure.username=sa
-jdbc.azure.password=ShopWeb!
-
+jdbc.azure.password=
