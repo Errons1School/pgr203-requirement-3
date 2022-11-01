@@ -85,11 +85,15 @@ public class WebShop {
     }
 
     public static void main(String[] args) throws Exception {
+        ServerStart();
+        //FillServerWhitData();
+    }
+
+    private static void ServerStart() throws Exception {
         int port = Optional.ofNullable(System.getenv("HTTP_PLATFORM_PORT"))
                 .map(Integer::parseInt)
                 .orElse(8080);
         new WebShop(port).start();
-        //FillServerWhitData();
     }
 
     private static void FillServerWhitData() throws IOException, SQLException {

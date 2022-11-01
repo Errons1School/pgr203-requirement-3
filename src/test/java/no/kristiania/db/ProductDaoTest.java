@@ -23,6 +23,7 @@ public class ProductDaoTest {
         );
 
         dao.saveProduct(product);
+
         var dbProducts = dao.getAllProduct();
 
         assertThat(dbProducts.get(0))
