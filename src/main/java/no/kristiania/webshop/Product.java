@@ -7,6 +7,7 @@ public class Product {
     private String description;
     private int price;
     private int stock;
+    private Long id;
 
     public Product() {}
 
@@ -65,5 +66,13 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }

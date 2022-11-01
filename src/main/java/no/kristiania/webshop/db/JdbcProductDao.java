@@ -38,6 +38,10 @@ public class JdbcProductDao implements ProductDao{
             statementProduct.setInt(5, product.getPrice());
             statementProduct.setInt(6, product.getStock());
             statementProduct.executeUpdate();
+            try (var generatedKeys = statementProduct.getGeneratedKeys()) {
+                generatedKeys.next();
+                product.setId(generatedKeys.getLong(1));
+            }
         }
     }
 
@@ -56,13 +60,16 @@ public class JdbcProductDao implements ProductDao{
                // resultProducts.next();
                 while (resultProducts.next()){
                     var tmpProduct = new Product();
+                    tmpProduct.setId(resultProducts.getLong(1));
                     tmpProduct.setName(resultProducts.getString(2));
                     tmpProduct.setCategory(resultProducts.getString(3));
                     tmpProduct.setImg(resultProducts.getString(4));
                     tmpProduct.setDescription(resultProducts.getString(5));
                     tmpProduct.setPrice(resultProducts.getInt(6));
                     tmpProduct.setStock(resultProducts.getInt(7));
+
                     products.add(tmpProduct);
+
                 }
 
                 return products;
