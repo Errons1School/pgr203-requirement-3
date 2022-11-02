@@ -67,14 +67,14 @@
                 </executions>
             </plugin>
 
-<!--            VVV Maven plugin has a plugin command for config! mavnev -> Plugins -> azure-webapp -> azure-webapp:config -->
+<!--            VVV Maven plugin has a plugin command for config! maven -> Plugins -> azure-webapp -> azure-webapp:config -->
             <plugin>
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-webapp-maven-plugin</artifactId>
                 <version>2.7.0</version>
                 <configuration>
                     <schemaVersion>v2</schemaVersion>
-                    <subscriptionId></subscriptionId>
+<!--                    <subscriptionId></subscriptionId>-->
 <!--                    VVV Gets the same name from maven project-->
                     <resourceGroup>${project.groupId}</resourceGroup>
 <!--                    VVV This gets name for upload from config beside JVM version-->

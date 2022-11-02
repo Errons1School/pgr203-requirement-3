@@ -11,17 +11,13 @@ import no.kristiania.webshop.db.ProductDao;
 import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Path("/products")
 public class ProductEndpoint {
 
-
     @Inject
     private ProductDao dao;
-
-
 
     @GET
     public Response getAllProducts() throws URISyntaxException, SQLException {
@@ -60,7 +56,6 @@ public class ProductEndpoint {
         dao.saveProduct(tmpProd);
         System.out.println("Added Product! Name:'" + tmpProd.getName() + "'");
         return Response.ok().build();
-
     }
 
 }

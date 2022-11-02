@@ -95,7 +95,7 @@ public class WebShop {
         int port = Optional.ofNullable(System.getenv("HTTP_PLATFORM_PORT"))
                 .map(Integer::parseInt)
                 .orElse(8080);
-        new WebShop(port,dataSource).start();
+        new WebShop(port, dataSource).start();
     }
 
     private static void FillServerWhitData() throws IOException, SQLException {

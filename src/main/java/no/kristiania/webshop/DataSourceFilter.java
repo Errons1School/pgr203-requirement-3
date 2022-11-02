@@ -1,17 +1,15 @@
 package no.kristiania.webshop;
 
 import jakarta.servlet.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DataSourceFilter implements Filter {
-    private final WebshopEndpointConfig config;
 
+    private final WebshopEndpointConfig config;
     public DataSourceFilter(WebshopEndpointConfig config) {
         this.config = config;
     }
@@ -20,19 +18,21 @@ public class DataSourceFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)  throws IOException, ServletException {
 
         try {
-            var con = config.createConnectionForRequest();
-            con.setAutoCommit(false);
-            //con.beginRequest();
+//            Get threadsafe connection from HikariCP.
+            var connection = config.createConnectionForRequest();
+//            Turn of auto commit, so we can manage connection within filter.
+            connection.setAutoCommit(false);
+//            Sends the connection of do relevant DAO
             filterChain.doFilter(servletRequest, servletResponse);
-            con.commit();
-            con.close();
-            //con.endRequest();
-
-
+            connection.commit();
+            connection.close();
+//            Remove closed connection at HikariCP
             config.cleanRequestConnection();
-        } catch (SQLException e) {
 
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
     }
+
 }

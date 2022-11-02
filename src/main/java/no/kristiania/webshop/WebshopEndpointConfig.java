@@ -11,9 +11,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class WebshopEndpointConfig extends ResourceConfig {
-    private ThreadLocal<Connection> requestConnection = new ThreadLocal<>();
 
-    private DataSource dataSource;
+    private final ThreadLocal<Connection> requestConnection = new ThreadLocal<>();
+    private final DataSource dataSource;
 
     public WebshopEndpointConfig(DataSource dataSource) {
         super(ProductEndpoint.class);
@@ -23,7 +23,7 @@ public class WebshopEndpointConfig extends ResourceConfig {
             @Override
             protected void configure() {
                 bind(JdbcProductDao.class).to(ProductDao.class);
-                bindFactory(() -> requestConnection.get())
+                bindFactory(requestConnection::get)
                         .to(Connection.class)
                         .in(RequestScoped.class);
             }
