@@ -31,7 +31,7 @@ jobs:
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
       - name: Build with Maven Clean
-        run: mvn clean install
+        run: mvn -B package --file pom.xml --fail-at-end
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -40,7 +40,7 @@ jobs:
   deploy:
     permissions:
       contents: none
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Development'
