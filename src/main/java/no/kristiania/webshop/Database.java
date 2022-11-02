@@ -16,18 +16,19 @@ public class Database {
         }
 
         var dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(properties.getProperty("jdbc.url"));
+        dataSource.setUsername(properties.getProperty("jdbc.username"));
+        dataSource.setPassword(properties.getProperty("jdbc.password"));
 
-        var azureUser = System.getenv("DB_USER");
+        /*var azureUser = System.getenv("DB_USER");
         if (azureUser != null) {
             dataSource.setJdbcUrl(System.getenv("DB_URL"));
             dataSource.setUsername(azureUser);
             dataSource.setPassword(System.getenv("DB_PASSWORD"));
 
         } else {
-            dataSource.setJdbcUrl(properties.getProperty("jdbc.docker.url"));
-            dataSource.setUsername(properties.getProperty("jdbc.docker.username"));
-            dataSource.setPassword(properties.getProperty("jdbc.docker.password"));
-        }
+
+        }*/
 
         var flyway = Flyway.configure().dataSource(dataSource).load();
         flyway.migrate();

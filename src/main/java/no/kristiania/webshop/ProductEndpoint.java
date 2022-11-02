@@ -1,25 +1,32 @@
 package no.kristiania.webshop;
 
+import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
+import no.kristiania.webshop.db.ProductDao;
 
 import java.io.StringReader;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Path("/products")
 public class ProductEndpoint {
 
-    private final static List<Product> products = new ArrayList<>();
+
+    @Inject
+    private ProductDao dao;
+
 
 
     @GET
-    public Response getAllProducts() throws URISyntaxException {
+    public Response getAllProducts() throws URISyntaxException, SQLException {
         var result = Json.createArrayBuilder();
+        var products = dao.getAllProduct();
         for (var prod : products) {
             result.add(Json.createObjectBuilder()
                     .add("name", prod.getName())
@@ -37,7 +44,7 @@ public class ProductEndpoint {
     }
 
     @POST
-    public Response addProducts(String body) {
+    public Response addProducts(String body) throws SQLException {
         var reader = new StringReader(body);
         var jsonBody = Json.createReader(reader).readObject();
 
@@ -50,14 +57,10 @@ public class ProductEndpoint {
                 jsonBody.getInt("stock")
         );
 
-        products.add(tmpProd);
+        dao.saveProduct(tmpProd);
         System.out.println("Added Product! Name:'" + tmpProd.getName() + "'");
         return Response.ok().build();
 
     }
 
-    static {
-
-
-    }
 }

@@ -21,7 +21,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>2.22.2</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -52,6 +52,16 @@
 <!--                                VVV This is needed for making correct fat-jar-->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
@@ -103,19 +113,19 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.12.1</version>
                 <configuration>
-                    <nodeVersion>v16.13.2</nodeVersion>
+                    <nodeVersion>v18.12.0</nodeVersion>
                     <workingDirectory>src/main/client</workingDirectory>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install node</id>
+                        <id>install-node</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>install node_modules</id>
+                        <id>install-node_modules</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>npm</goal>
@@ -125,7 +135,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm build</id>
+                        <id>npm-build</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>npm</goal>

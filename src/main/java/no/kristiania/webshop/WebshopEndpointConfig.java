@@ -8,6 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class WebshopEndpointConfig extends ResourceConfig {
     private ThreadLocal<Connection> requestConnection = new ThreadLocal<>();
@@ -27,5 +28,13 @@ public class WebshopEndpointConfig extends ResourceConfig {
                         .in(RequestScoped.class);
             }
         });
+    }
+    public Connection createConnectionForRequest() throws SQLException {
+        requestConnection.set(dataSource.getConnection());
+        return requestConnection.get();
+    }
+
+    public void cleanRequestConnection() {
+        requestConnection.remove();
     }
 }
