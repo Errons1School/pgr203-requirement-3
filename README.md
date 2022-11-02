@@ -1,7 +1,7 @@
 # Innlevering 3: Deployment og database
 [![Java CI with Maven and deploy to Azure](https://github.com/kristiania-pgr209-2022/pgr203-3-freebattie/actions/workflows/maven.yaml/badge.svg)](https://github.com/kristiania-pgr209-2022/pgr203-3-freebattie/actions/workflows/maven.yaml)
 ## Oppgave
-
+### [Link til Azure deployment](http://arbeidskrav3-webshop-user.azurewebsites.net/)
 Dere skal videreføre Jetty-serveren fra innlevering 2 slik at den kan deployes på Azure.
 
 Applikasjonen skal være som før og inneholde en React applikasjon og som benytter JAX-RS med Jersey for å behandle en GET request og en POST request. Applikasjonen skal være en webshop som kan registrere og liste varer i en nettbutikk. *Varene skal registres i SQL Server på Azure*
