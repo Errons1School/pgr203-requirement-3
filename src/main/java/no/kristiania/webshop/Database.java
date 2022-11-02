@@ -11,20 +11,29 @@ public class Database {
 
     public static HikariDataSource getDataSource() throws IOException {
         var properties = new Properties();
-        try (var reader = new FileReader("application.properties")) {
-            properties.load(reader);
+        FileReader reader = new FileReader("application.properties");
+        var dataSource = new HikariDataSource();
+        if (reader != null){
+            try (reader) {
+                properties.load(reader);
+
+                dataSource.setJdbcUrl(properties.getProperty("jdbc.url"));
+                dataSource.setUsername(properties.getProperty("jdbc.username"));
+                dataSource.setPassword(properties.getProperty("jdbc.password"));
+            }
+        }
+        else{
+            dataSource.setJdbcUrl(System.getenv("DB_URL"));
+            dataSource.setUsername(System.getenv("DB_USER"));
+            dataSource.setPassword(System.getenv("DB_PASSWORD"));
         }
 
-        var dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(properties.getProperty("jdbc.url"));
-        dataSource.setUsername(properties.getProperty("jdbc.username"));
-        dataSource.setPassword(properties.getProperty("jdbc.password"));
+
+
 
         /*var azureUser = System.getenv("DB_USER");
         if (azureUser != null) {
-            dataSource.setJdbcUrl(System.getenv("DB_URL"));
-            dataSource.setUsername(azureUser);
-            dataSource.setPassword(System.getenv("DB_PASSWORD"));
+
 
         } else {
 

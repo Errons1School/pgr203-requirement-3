@@ -1,7 +1,11 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-name: Java CI with Maven
 
+name: Java CI with Maven and deploy to Azure
+env:
+  arbeidskrav3-webshop-user: your-app-name    # set this to the name of your Azure Web App
+  JAVA_VERSION: '17'                  # set this to the Java version to use
+  DISTRIBUTION: zulu                  # set this to the Java distribution
 on:
   push:
     branches: [ "main" ]
@@ -26,3 +30,34 @@ jobs:
       - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
+      - name: Build with Maven
+        run: mvn clean install
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/target/arbeidskrav3-webshop-1.0-*.jar'
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: java-app
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '*.jar'
+
+
