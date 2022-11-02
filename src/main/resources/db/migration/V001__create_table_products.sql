@@ -1,10 +1,9 @@
-create table products
-(
-    idprod int IDENTITY PRIMARY KEY,
-    nameprod varchar(1000),
-    catagory varchar(1000),
+create table products (
+    id int IDENTITY PRIMARY KEY,
+    name varchar(1000),
+    category varchar(1000),
     img varchar(1000),
-    proddesc varchar(8000),
+    description varchar(8000),
     price int,
     stock int
 );

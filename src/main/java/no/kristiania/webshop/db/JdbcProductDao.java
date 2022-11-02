@@ -22,12 +22,8 @@ public class JdbcProductDao implements ProductDao{
     @Override
     public void saveProduct(Product product) throws SQLException {
 
-        /*try (connection) {
-
-
-        }*/
         var sql = """
-                INSERT INTO products (nameprod, catagory, img, proddesc, price, stock)
+                INSERT INTO products (name, category, img, description, price, stock)
                 VALUES (?, ?, ?, ?, ?, ?);
             """;
 
@@ -68,7 +64,7 @@ public class JdbcProductDao implements ProductDao{
 
         var sql = """
                 SELECT *
-                FROM products WHERE idprod = ? ;
+                FROM products WHERE id = ? ;
             """;
 
         try (var statement = connection.prepareStatement(sql)) {

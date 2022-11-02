@@ -1,13 +1,13 @@
 package no.kristiania.webshop;
 
 public class Product {
+    private Long id;
     private String name;
     private String category;
     private String img;
     private String description;
     private int price;
     private int stock;
-    private Long id;
 
     public Product() {}
 
