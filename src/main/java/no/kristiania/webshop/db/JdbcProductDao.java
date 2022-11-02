@@ -55,7 +55,6 @@ public class JdbcProductDao implements ProductDao{
 
             try (var statementProducts = connection.prepareStatement(sql)) {
                 List<Product> products = new ArrayList<>();
-
                 var resultProducts = statementProducts.executeQuery();
 
                 while (resultProducts.next()){
@@ -72,19 +71,19 @@ public class JdbcProductDao implements ProductDao{
                 FROM products WHERE idprod = ? ;
             """;
 
-
-            try (var statement = connection.prepareStatement(sql)) {
-                statement.setLong(1, id);
-                try (var resultProduct = statement.executeQuery()) {
-                    if (resultProduct.next()) {
-                        return FillProduct(resultProduct);
-                    } else {
-                        return null;
-                    }
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            try (var resultProduct = statement.executeQuery()) {
+                if (resultProduct.next()) {
+                    return FillProduct(resultProduct);
+                } else {
+                    return null;
                 }
             }
+        }
 
     }
+
     static Product FillProduct(ResultSet rs) throws SQLException {
 
         var tmpProduct = new Product();
