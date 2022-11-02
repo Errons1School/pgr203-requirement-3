@@ -30,7 +30,7 @@ jobs:
       - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
-      - name: Build with Maven
+      - name: Build with Maven Clean
         run: mvn clean install
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
