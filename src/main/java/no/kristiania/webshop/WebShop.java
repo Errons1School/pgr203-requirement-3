@@ -86,8 +86,8 @@ public class WebShop {
     }
 
     public static void main(String[] args) throws Exception {
-        //ServerStart();
-        FillServerWhitData();
+        ServerStart();
+        //FillServerWhitData();
     }
 
     private static void ServerStart() throws Exception {
