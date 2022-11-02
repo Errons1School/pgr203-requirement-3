@@ -15,7 +15,7 @@ public class ProductDaoTest {
     public ProductDaoTest() throws SQLException {}
 
     //    We sort the arrays for Platforms because when we check for .isEqual the order of array must mach.
-    /*@Test
+    @Test
     public void saveGameTest() throws SQLException {
         var product = new Product(
                 "laptop", "laptop", "laptop", "laptop", 199, 1
@@ -23,13 +23,13 @@ public class ProductDaoTest {
 
         dao.saveProduct(product);
 
-        var dbProducts = dao.getAllProduct();
+        var dbProduct = dao.getProduct(product.getId());
 
-        assertThat(dbProducts.get(0))
+        assertThat(dbProduct)
                 .usingRecursiveComparison()
                 .isEqualTo(product)
                 .isNotSameAs(product);
-    }*/
+    }
 
 
 }
