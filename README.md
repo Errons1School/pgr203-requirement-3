@@ -4,6 +4,7 @@
 ### [Link til Azure deployment](http://arbeidskrav3-webshop-user.azurewebsites.net/)
 ## CodeReview
 ### [Bjarte](https://github.com/kristiania-pgr209-2022/pgr203-3-Simpada/pull/1/files#r1011814163)
+### [Snorre](https://github.com/kristiania-pgr209-2022/pgr203-3-Simpada/pull/1#pullrequestreview-1165283926)
 Dere skal videreføre Jetty-serveren fra innlevering 2 slik at den kan deployes på Azure.
 
 Applikasjonen skal være som før og inneholde en React applikasjon og som benytter JAX-RS med Jersey for å behandle en GET request og en POST request. Applikasjonen skal være en webshop som kan registrere og liste varer i en nettbutikk. *Varene skal registres i SQL Server på Azure*
