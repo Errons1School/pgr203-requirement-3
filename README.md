@@ -1,5 +1,5 @@
 # Innlevering 3: Deployment og database
-
+[![Java CI with Maven and deploy to Azure](https://github.com/kristiania-pgr209-2022/pgr203-3-freebattie/actions/workflows/maven.yaml/badge.svg)](https://github.com/kristiania-pgr209-2022/pgr203-3-freebattie/actions/workflows/maven.yaml)
 ## Oppgave
 
 Dere skal videreføre Jetty-serveren fra innlevering 2 slik at den kan deployes på Azure.
@@ -19,27 +19,27 @@ Når dere oppretter repository via Github Classroom linken på Canvas, vil det a
 ## Krav til innlevering
 
 * Programmet
-  * [ ] En applikasjons som kjører på Azure: https://<fyll ut>.azurewebsites.net
-  * [ ] Serveren skal være implementert i Jetty, med en React applikasjon, JAX-RS endepunkt og DAO-kode
-  * [ ] En JUnit test som sjekker GET
-  * [ ] En JUnit test som sjekker POST
-  * [ ] En JUnit test som sjekker at DAO lagrer mot H2
-  * [ ] En JUnit test som sjekker at title på index.html er korrekt (bygges fra Vite)
+  * [x] En applikasjons som kjører på Azure: https://<fyll ut>.azurewebsites.net
+  * [x] Serveren skal være implementert i Jetty, med en React applikasjon, JAX-RS endepunkt og DAO-kode
+  * [x] En JUnit test som sjekker GET
+  * [x] En JUnit test som sjekker POST
+  * [x] En JUnit test som sjekker at DAO lagrer mot H2
+  * [x] En JUnit test som sjekker at title på index.html er korrekt (bygges fra Vite)
 * Innlevering
-  * [ ] Begge har levert link til Github Repository i Canvas
-  * [ ] Koden er sjekket inn på et repository på https://github.com/kristiania-pgr209-2021
-  * [ ] GitHub repository er private. Dere skal gi tilgang til de som gir code review
+  * [x] Begge har levert link til Github Repository i Canvas
+  * [x] Koden er sjekket inn på et repository på https://github.com/kristiania-pgr209-2021
+  * [x] GitHub repository er private. Dere skal gi tilgang til de som gir code review
 * Github
-  * [ ] Dere har merget pull en pull request
+  * [x] Dere har merget pull en pull request
   * [ ] Dere har mottatt code review fra medstudenter på feedback-pull request
-  * [ ] `.idea`, `*.iml` og `target` er lagt til i .gitignore og ikke sjekket inn
-  * [ ] Github Actions rapporterer at 100% av testene kjører grønt
+  * [x] `.idea`, `*.iml` og `target` er lagt til i .gitignore og ikke sjekket inn
+  * [x] Github Actions rapporterer at 100% av testene kjører grønt
 * Kode
-  * [ ] Koden skal være korrekt strukturert etter Maven sine standarder (koden skal ligge under `src/main/java` og tester under `src/test/java`)
-  * [ ] Klassene skal ligge i Java packages
-  * [ ] Klassenavn, pakkenavn, metodenavn og variabelnavn skal følge Java-konvensjoner når det gjelder små og store bokstaver
-  * [ ] Koden skal være korrekt indentert
-  * [ ] Dersom dere har valgt en stor oppgave behøver dere ikke løse hele. 6-7 tester er tilstrekkelig
+  * [x] Koden skal være korrekt strukturert etter Maven sine standarder (koden skal ligge under `src/main/java` og tester under `src/test/java`)
+  * [x] Klassene skal ligge i Java packages
+  * [x] Klassenavn, pakkenavn, metodenavn og variabelnavn skal følge Java-konvensjoner når det gjelder små og store bokstaver
+  * [x] Koden skal være korrekt indentert
+  * [x] Dersom dere har valgt en stor oppgave behøver dere ikke løse hele. 6-7 tester er tilstrekkelig
 * README-fil
-  * [ ] Korrekt GitHub Actions status badge
-  * [ ] Link til code review dere har gjort for medstudenter med minst én issue fra hver av dere
+  * [x] Korrekt GitHub Actions status badge
+  * [x] Link til code review dere har gjort for medstudenter med minst én issue fra hver av dere
