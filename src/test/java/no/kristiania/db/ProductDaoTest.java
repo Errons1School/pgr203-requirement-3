@@ -23,9 +23,9 @@ public class ProductDaoTest {
 
         dao.saveProduct(product);
 
-        var dbProducts = dao.getAllProduct();
+        var dbProduct = dao.getProduct(product.getId());
 
-        assertThat(dbProducts.get(0))
+        assertThat(dbProduct)
                 .usingRecursiveComparison()
                 .isEqualTo(product)
                 .isNotSameAs(product);

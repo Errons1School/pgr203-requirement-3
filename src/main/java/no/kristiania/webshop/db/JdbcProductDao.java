@@ -57,7 +57,7 @@ public class JdbcProductDao implements ProductDao{
                 List<Product> products = new ArrayList<>();
 
                 var resultProducts = statementProducts.executeQuery();
-               // resultProducts.next();
+
                 while (resultProducts.next()){
                     products.add(FillProduct(resultProducts));
                 }
@@ -65,11 +65,11 @@ public class JdbcProductDao implements ProductDao{
             }
     }
     @Override
-    public Product getProduct(Long id) throws SQLException {
+    public Product getProduct(long id) throws SQLException {
 
         var sql = """
                 SELECT *
-                FROM products WHERE id = ? ;
+                FROM products WHERE idprod = ? ;
             """;
 
 
@@ -86,7 +86,7 @@ public class JdbcProductDao implements ProductDao{
 
     }
     static Product FillProduct(ResultSet rs) throws SQLException {
-        var product = new Product();
+
         var tmpProduct = new Product();
         tmpProduct.setId(rs.getLong(1));
         tmpProduct.setName(rs.getString(2));
@@ -95,7 +95,7 @@ public class JdbcProductDao implements ProductDao{
         tmpProduct.setDescription(rs.getString(5));
         tmpProduct.setPrice(rs.getInt(6));
         tmpProduct.setStock(rs.getInt(7));
-        return product;
+        return tmpProduct;
     }
 
 }

@@ -10,6 +10,6 @@ public interface ProductDao {
     void saveProduct(Product product) throws SQLException;
 
     List<Product> getAllProduct() throws SQLException;
-     Product getProduct(Long index) throws SQLException;
+     Product getProduct(long index) throws SQLException;
 
 }
