@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import no.kristiania.webshop.Product;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class JdbcProductDao implements ProductDao{
             }
         }
     }
-
     @Override
     public List<Product> getAllProduct() throws SQLException {
 
@@ -59,23 +59,43 @@ public class JdbcProductDao implements ProductDao{
                 var resultProducts = statementProducts.executeQuery();
                // resultProducts.next();
                 while (resultProducts.next()){
-                    var tmpProduct = new Product();
-                    tmpProduct.setId(resultProducts.getLong(1));
-                    tmpProduct.setName(resultProducts.getString(2));
-                    tmpProduct.setCategory(resultProducts.getString(3));
-                    tmpProduct.setImg(resultProducts.getString(4));
-                    tmpProduct.setDescription(resultProducts.getString(5));
-                    tmpProduct.setPrice(resultProducts.getInt(6));
-                    tmpProduct.setStock(resultProducts.getInt(7));
-
-                    products.add(tmpProduct);
-
+                    products.add(FillProduct(resultProducts));
                 }
-
                 return products;
             }
+    }
+    @Override
+    public Product getProduct(Long id) throws SQLException {
+
+        var sql = """
+                SELECT *
+                FROM products WHERE id = ? ;
+            """;
 
 
+            try (var statement = connection.prepareStatement(sql)) {
+                statement.setLong(1, id);
+                try (var resultProduct = statement.executeQuery()) {
+                    if (resultProduct.next()) {
+                        return FillProduct(resultProduct);
+                    } else {
+                        return null;
+                    }
+                }
+            }
+
+    }
+    static Product FillProduct(ResultSet rs) throws SQLException {
+        var product = new Product();
+        var tmpProduct = new Product();
+        tmpProduct.setId(rs.getLong(1));
+        tmpProduct.setName(rs.getString(2));
+        tmpProduct.setCategory(rs.getString(3));
+        tmpProduct.setImg(rs.getString(4));
+        tmpProduct.setDescription(rs.getString(5));
+        tmpProduct.setPrice(rs.getInt(6));
+        tmpProduct.setStock(rs.getInt(7));
+        return product;
     }
 
 }
