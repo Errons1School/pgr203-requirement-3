@@ -13,6 +13,7 @@ public class Database {
         var properties = new Properties();
         FileReader reader = new FileReader("application.properties");
         var dataSource = new HikariDataSource();
+
         if (reader != null){
             try (reader) {
                 properties.load(reader);
