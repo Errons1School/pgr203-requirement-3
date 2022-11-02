@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <azure.appName>${project.artifactId}-${user.name}1</azure.appName>
+        <azure.appName>${project.artifactId}-${user.name}</azure.appName>
     </properties>
 
 
