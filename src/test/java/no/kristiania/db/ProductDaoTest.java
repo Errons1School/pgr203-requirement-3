@@ -14,7 +14,6 @@ public class ProductDaoTest {
 
     public ProductDaoTest() throws SQLException {}
 
-
     //    We sort the arrays for Platforms because when we check for .isEqual the order of array must mach.
     /*@Test
     public void saveGameTest() throws SQLException {
